@@ -12,7 +12,7 @@ function generatePassword(){
   var pwdLength = window.prompt("Choose length of password.Min 8 chars and Max 128 chars");
 
 
-     if(pwdCriteria >=8 && pwdCriteria <= 128 ){
+     if(pwdLength >=8 && pwdLength <= 128 ){
        var pwdLength_new = parseInt(pwdLength);
            
        var lcLetter1 = confirm ("Do you want to include lowercase letters ?");
