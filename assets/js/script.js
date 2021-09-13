@@ -1,5 +1,9 @@
 // Assignment code here
-
+var lcLetter = 'abcdefghijklmnopqrstuvwxyz';
+var ucLetter = lcLetter.toUpperCase();
+var special = '!?=#*$@+-.';
+var numbers = '0123456789'; 
+var password = '';
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -8,234 +12,96 @@ var generateBtn = document.querySelector("#generate");
 //my code
 function generatePassword(){
 
-  var lcLetter = 'abcdefghijklmnopqrstuvwxyz';
-  var ucLetter = lcLetter.toUpperCase();
-  var special = '!?=#*$@+-.';
-  var numbers = '0123456789'; 
-
-
-  var pwdLength = window.prompt("Choose length of password.Min 8 chars and Max 128 chars");
-
-
-     if(pwdLength >=8 && pwdLength <= 128 ){
-       var pwdLength_new = parseInt(pwdLength);
-           console.log(" password length" +pwdLength_new);
-       var lcLetter1 = confirm ("Do you want to include lowercase letters ?");
-
-       var ucLetter1 = confirm ("Do you want to include Uppercase letters ?");
-       var numbers1 = confirm( "Do you want to include Numbers ? ");
-       var special1 =confirm("Do you want to include Special Chars ?");  
+  var pwdLength = parseInt(window.prompt("Choose length of password.Min 8 chars and Max 128 chars"));
+   // if no input provided
+  if(!pwdLength)
+  {
+    alert("Please provide a value");
+  }
+  // if input lessthan 8
+   else if (pwdLength < 8 || pwdLength > 128)
+   {
    
-   
-// All  confirm msges are true
+    pwdLength = parseInt(window.prompt("you must choose between 8  and  128 chars"));
+  }
+   else {
+    confirmNumber =  confirm("Will this contain numbers?");
+    confirmCharacter = confirm("Will this contain special characters?");
+    confirmUppercase = confirm("Will this contain Uppercase letters?");
+    confirmLowercase = confirm("Will this contain Lowercase letters?");
 
-      
-       if(pwdLength_new >= 8 && pwdLength_new <= 128 && lcLetter1 && ucLetter1 && numbers1 && special1){
+   }
 
-
-          
-        var lengthpwd = pwdLength_new ;
-
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = ucLetter +lcLetter +numbers + special;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password*********" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-       // if lc,uc,num selected
-        if(pwdLength_new >= 8 && pwdLength_new <= 128 && lcLetter1 && ucLetter1 && numbers1){
+// user don't select any option
+   if(!confirmLowercase && !confirmUppercase && !confirmCharacter && !confirmNumber ) {
+      password = alert ("You must choose a criteria.");
+   }
 
 
-            
-          var lengthpwd = pwdLength_new ;
+   // user select all 4
+  else if(confirmLowercase && confirmUppercase && confirmCharacter && confirmNumber ) {
+    password = lcLetter + ucLetter +numbers+special;
+ }
+ // user select 3 lc,uc,special char
 
-          console.log("length of password in if block" + lengthpwd);
-          function generatepwd(lengthpwd){
-            var Allpassword = ucLetter +lcLetter +numbers;
-            console.log( " Allpassword" + Allpassword);
-            var password = ' ';
-              for( var i = 0; i < lengthpwd; i++){
-                // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-                var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-                console.log ("random password" + randomPwd);
-                  password +=  Allpassword.charAt(randomPwd);
-                console.log("final password" +password);
-              }
-              // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-              return password;
-          }
-       
-       } 
+ else if(confirmLowercase && confirmUppercase && confirmCharacter  ) {
+  password = lcLetter + ucLetter +special;
 
+ }
 
-       // if lc uc selected
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && lcLetter1 && ucLetter1){
+ // user selects lc,uc,num
+ else if(confirmLowercase && confirmUppercase && confirmNumber ) {
+  password = lcLetter + ucLetter +numbers;
+}
 
+// user selects lc,num , spcial
+else if(confirmLowercase && confirmCharacter && confirmNumber ) {
+  password = lcLetter+numbers+special;
+}
+// user selects lc,uc
+else if(confirmLowercase && confirmUppercase) {
+  password = lcLetter + ucLetter;
+}
 
-          
-        var lengthpwd = pwdLength_new ;
+// user selects num, char
+else if(confirmCharacter && confirmNumber ) {
+  password = numbers+special;
+}
 
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = ucLetter +lcLetter;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
+// user selects uc,num,special
+  else if(cconfirmUppercase && confirmCharacter && confirmNumber ) {
+    password =  ucLetter +numbers+special;
+ }
+ // user select lc
+ else if(confirmLowercase ) {
+  password = lcLetter ;
+}
+// user selct uc
+else if( confirmUppercase ) {
+  password = ucLetter;
+}
 
-       // if lc selected
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && lcLetter1){
+// user select num
 
+else if(confirmNumber ) {
+  password = numbers;
+}
+// user select special char
 
-          
-        var lengthpwd = pwdLength_new ;
+else if( confirmCharacter  ) {
+  password = special;
+}
+//password1 a placeholder for length
+var password1 = [];
 
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = lcLetter;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-       // if only uc selected
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && ucLetter1){
-
-
-          
-        var lengthpwd = pwdLength_new ;
-
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = ucLetter;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-
-       //if only numbers selected
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && numbers1){
-
-
-          
-        var lengthpwd = pwdLength_new ;
-
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = numbers;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-       // if only special char
-
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && special1){
-
-
-          
-        var lengthpwd = pwdLength_new ;
-
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = special;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-       // number and special
-       else if(pwdLength_new >= 8 && pwdLength_new <= 128 && special1 && numbers1){
-
-
-          
-        var lengthpwd = pwdLength_new ;
-
-        console.log("length of password in if block" + lengthpwd);
-        function generatepwd(lengthpwd){
-          var Allpassword = special + numbers;
-          console.log( " Allpassword" + Allpassword);
-          var password = ' ';
-            for( var i = 0; i < lengthpwd; i++){
-              // password between any two numbers :Math.floor(Math.random() * (max - min + 1)) + min;
-               var randomPwd =  Math.floor(Math.random()* Allpassword.length);
-              console.log ("random password" + randomPwd);
-                password +=  Allpassword.charAt(randomPwd);
-               console.log("final password" +password);
-            }
-            // if pwdLength is 8 ,then password should return 8 character including lc,uc,num,specialchar
-             return password;
-        }
-       
-       } 
-       else{
-         alert("Please select atleast one condition from lowercase,uppercase,number or special Character");
-       }
- 
-    } else{
-      alert("Please enter a number between 8 and 128");
-    }
-
-
- 
+// random selection
+for (var i = 0;i < pwdLength; i++){
+  var addPassword = password[Math.floor(Math.random()*password.length + 1)];
+    password1.push(addPassword);
+}
+ var joinpwd =password1.join("");
+//end of generatePassword()
+return joinpwd;
 }
 
 // Write password to the #password input
