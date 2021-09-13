@@ -34,7 +34,7 @@ function generatePassword(){
 
 // user don't select any option
    if(!confirmLowercase && !confirmUppercase && !confirmCharacter && !confirmNumber ) {
-      password = alert ("You must choose a criteria.");
+       alert ("You must choose a criteria.");
    }
 
 
@@ -96,11 +96,16 @@ var password1 = [];
 
 // random selection
 for (var i = 0;i < pwdLength; i++){
-  var addPassword = password[Math.floor(Math.random()*password.length + 1)];
-    password1.push(addPassword);
+  var randomCharacter = password[Math.floor(Math.random()*password.length + 1)];
+  // var addPassword111 = Math.floor(Math.random()*password.length + 1);
+  console.log("addPassword************" +randomCharacter);
+ 
+  password1.push(randomCharacter);
+
+  
 }
- var joinpwd =password1.join("");
-//end of generatePassword()
+var joinpwd =password1.join("");
+// //end of generatePassword()
 return joinpwd;
 }
 
